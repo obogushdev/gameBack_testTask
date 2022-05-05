@@ -10,13 +10,23 @@ Test task
 3. Run next commands one by one
 ```bash
 $ docker-compose build
-$ docker-compose up
+$ docker-compose up -d
+```
+
+To run ony DB image use 
+```bash
+$ docker-compose up -d db
+```
+
+To run ony app image use 
+```bash
+$ docker-compose up -d web
 ```
 
 ## Variant 2 - run with native Node.js and MySQL DB
 
 ### Prerequisites
-    node.js
+    node.js (16.x)
     npm
     mySql server
 
@@ -25,7 +35,8 @@ $ docker-compose up
 ```bash
 $ npm run start:prod
 ```
-## Init routes
+
+## Fill tables with fake data
     
  After first run You can fill database with test data, to do this use route /init-data \
  ex. http://127.0.0.1:3000/init-data \
@@ -33,6 +44,8 @@ $ npm run start:prod
 
 
 ## Task routes
+Visit route /swagger-api/#/ for whole list of available endpoints
+ex.: http://127.0.0.1:3000/swagger-api/
 
  [method:GET] /catalog - get array of all rows from Catalog table
 
@@ -45,5 +58,4 @@ $ npm run start:prod
 }
 ```
 
-Visit route /swagger-api/#/ for whole list of available endpoints
-ex.: http://127.0.0.1:3000/swagger-api/
+
