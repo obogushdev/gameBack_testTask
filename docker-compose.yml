@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+    db:
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: $DB_PASS
+            MYSQL_DATABASE: $DB_NAME
+        ports:
+            - $DB_PORT:$DB_PORT
+    web:
+        build:
+            context: ./
+        volumes:
+            - .:/src
+        command: npm run start:dev
+        ports:
+            - "3000:3000"
+        environment:
+            NODE_ENV: development
+            DB_HOST: db
+            DB_PORT: $DB_PORT
+            DB_USER: $DB_USER
+            DB_PASS: $DB_PASS
+            DB_NAME: $DB_NAME
+        env_file:
+            - .env
+        links:
+            - db
+
+networks:
+    default:
